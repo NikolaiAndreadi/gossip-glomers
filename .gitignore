@@ -1,0 +1,15 @@
+# Binaries
+bin/
+*.exe
+*.test
+*.out
+
+# Maelstrom run artifacts
+store/
+maelstrom/
+
+# IDE
+.idea/
+
+# macOS
+.DS_Store
