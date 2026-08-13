@@ -34,6 +34,11 @@ build:
 test-echo: build maelstrom
 	./$(MAELSTROM) test -w echo --bin $(BIN)/echo --node-count 1 --time-limit 10 --log-stderr
 
+.PHONY: test-unique
+test-unique: build maelstrom
+	./$(MAELSTROM) test -w unique-ids --bin $(BIN)/unique --time-limit 30 --rate 1000 \
+  --node-count 3 --availability total --nemesis partition
+
 # --- results
 
 .PHONY: serve
