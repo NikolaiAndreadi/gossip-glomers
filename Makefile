@@ -32,13 +32,17 @@ build:
 
 .PHONY: test-echo
 test-echo: build maelstrom
-	./$(MAELSTROM) test -w echo --bin $(BIN)/echo --node-count 1 --time-limit 10 --log-stderr
+	./$(MAELSTROM) test -w echo --bin $(BIN)/1-echo --node-count 1 --time-limit 10 --log-stderr
 
 .PHONY: test-unique
 test-unique: build maelstrom
-	./$(MAELSTROM) test -w unique-ids --bin $(BIN)/unique --time-limit 30 --rate 1000 \
+	./$(MAELSTROM) test -w unique-ids --bin $(BIN)/2-unique --time-limit 30 --rate 1000 \
   --node-count 3 --availability total --nemesis partition
 
+.PHONY: test-single-node-broadcast
+test-single-node-broadcast: build maelstrom
+	./$(MAELSTROM) test -w unique-ids --bin $(BIN)/3a-single-node-broadcast --time-limit 30 \
+  --rate 1000 --node-count 3 --availability total --nemesis partition
 # --- results
 
 .PHONY: serve
