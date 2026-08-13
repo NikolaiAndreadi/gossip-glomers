@@ -43,6 +43,10 @@ test-unique: build maelstrom
 test-single-node-broadcast: build maelstrom
 	./$(MAELSTROM) test -w broadcast --bin $(BIN)/3a-single-node-broadcast --node-count 1 --time-limit 20 --rate 10
 
+.PHONY: test-multi-node-broadcast
+test-multi-node-broadcast: build maelstrom
+	./$(MAELSTROM) test -w broadcast --bin $(BIN)/3b-multi-node-broadcast --node-count 5 --time-limit 20 --rate 10
+
 # --- results
 
 .PHONY: serve
