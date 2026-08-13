@@ -47,6 +47,12 @@ test-single-node-broadcast: build maelstrom
 test-multi-node-broadcast: build maelstrom
 	./$(MAELSTROM) test -w broadcast --bin $(BIN)/3b-multi-node-broadcast --node-count 5 --time-limit 20 --rate 10
 
+.PHONY: test-fault-tolerant-broadcast
+test-fault-tolerant-broadcast: build maelstrom
+	./$(MAELSTROM) test -w broadcast --bin $(BIN)/3b-multi-node-broadcast --node-count 5 --time-limit 20 --rate 10 \
+  --nemesis partition
+
+
 # --- results
 
 .PHONY: serve
