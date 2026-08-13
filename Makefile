@@ -41,8 +41,8 @@ test-unique: build maelstrom
 
 .PHONY: test-single-node-broadcast
 test-single-node-broadcast: build maelstrom
-	./$(MAELSTROM) test -w unique-ids --bin $(BIN)/3a-single-node-broadcast --time-limit 30 \
-  --rate 1000 --node-count 3 --availability total --nemesis partition
+	./$(MAELSTROM) test -w broadcast --bin $(BIN)/3a-single-node-broadcast --node-count 1 --time-limit 20 --rate 10
+
 # --- results
 
 .PHONY: serve
