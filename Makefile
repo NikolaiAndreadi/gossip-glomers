@@ -57,6 +57,11 @@ test-grow-only-counter: build maelstrom
 	./$(MAELSTROM) test -w g-counter --bin $(BIN)/4-grow-only-counter --node-count 3 --rate 100 --time-limit 20 \
   --nemesis partition
 
+.PHONY: test-grow-only-counter-stateless
+test-grow-only-counter-stateless: build maelstrom
+	./$(MAELSTROM) test -w g-counter --bin $(BIN)/4-grow-only-counter-stateless --node-count 3 --rate 100 --time-limit 20 \
+  --nemesis partition
+
 # --- results
 
 .PHONY: serve
