@@ -1,4 +1,4 @@
-// challenge #3b: Multi-Node Broadcast
+// challenge #3d: Efficient Broadcast. #3e also passes! check 'init' handler
 package main
 
 import (
