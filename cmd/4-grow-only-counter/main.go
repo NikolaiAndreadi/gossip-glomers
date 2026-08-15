@@ -66,8 +66,23 @@ func main() {
 	})
 
 	n.Handle("read", func(msg maelstrom.Message) error {
-		sum := 0
+		// seq-kv is sequentially consistent, so a plain read may observe an old state of other nodes' keys
+		// a special write of a value that never was written before cannot be ordered anywhere but the present
+		// so we use it to drag this node's session to the current state before read
+		writeCtx, cancel := context.WithTimeout(ctx, kvTimeout)
+		err := kv.Write(writeCtx, "sync-"+n.ID(), time.Now().UnixNano())
+		cancel()
+		if err != nil {
+			return err
+		}
+
+		// own key lags behind by up to flushInterval
+		// the local counter is the source of truth for this node's contribution
+		sum := counter.Total()
 		for _, nodeID := range n.NodeIDs() {
+			if nodeID == n.ID() {
+				continue
+			}
 			val, err := readCounter(ctx, kv, nodeID)
 			if err != nil {
 				return err
