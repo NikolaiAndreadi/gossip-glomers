@@ -52,6 +52,11 @@ test-efficient-fault-tolerant-broadcast: build maelstrom
 	./$(MAELSTROM) test -w broadcast --bin $(BIN)/3e-efficient-broadcast --node-count 25 --time-limit 20 --rate 100 \
   --latency 100 --nemesis partition
 
+.PHONY: test-grow-only-counter
+test-grow-only-counter: build maelstrom
+	./$(MAELSTROM) test -w g-counter --bin $(BIN)/4-grow-only-counter --node-count 3 --rate 100 --time-limit 20 \
+  --nemesis partition
+
 # --- results
 
 .PHONY: serve
