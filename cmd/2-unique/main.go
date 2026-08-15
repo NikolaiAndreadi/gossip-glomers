@@ -2,7 +2,6 @@
 package main
 
 import (
-	"encoding/binary"
 	"encoding/json"
 	"log"
 	"strconv"
@@ -52,11 +51,8 @@ func NewSnowflake() *Snowflake {
 }
 
 func (s *Snowflake) SetID(machineID string) {
-	var padded [8]byte
-	copy(padded[:], machineID)
-	machineIdBytes := binary.LittleEndian.Uint64(padded[:])
-	shiftedMachineId := int64(machineIdBytes&0x3FF) << 12 // 0x3FF - 10 bits
-	s.machineIdBits = &shiftedMachineId
+	numericID, _ := strconv.ParseUint(machineID[1:], 10, 10)
+	s.machineIdBits = new(int64(numericID) << 12)
 }
 
 const epochShift = 1675728000000 // skibidi toilet released. Shift from unix so that numbers are not too big
