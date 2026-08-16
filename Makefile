@@ -67,6 +67,11 @@ test-single-node-log: build maelstrom
 	./$(MAELSTROM) test -w kafka --bin $(BIN)/5a-single-node-kafka-style-log --node-count 1 --concurrency 2n \
   --time-limit 20 --rate 1000
 
+.PHONY: test-distributed-log
+test-distributed-log: build maelstrom
+	./$(MAELSTROM) test -w kafka --bin $(BIN)/5b-distributed-kafka-style-log --node-count 2 --concurrency 2n \
+  --time-limit 20 --rate 1000
+
 # --- results
 
 .PHONY: serve
