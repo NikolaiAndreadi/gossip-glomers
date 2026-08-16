@@ -43,8 +43,7 @@ test-echo: $(BIN)/1-echo $(MAELSTROM)
 
 .PHONY: test-unique
 test-unique: $(BIN)/2-unique $(MAELSTROM)
-	$(MTEST) -w unique-ids --bin $< --time-limit 30 --rate 1000 \
-  --node-count 3 --availability total --nemesis partition
+	$(MTEST) -w unique-ids --bin $< --time-limit 30 --rate 1000 --node-count 3 --availability total --nemesis partition
 
 .PHONY: test-single-node-broadcast
 test-single-node-broadcast: $(BIN)/3a-single-node-broadcast $(MAELSTROM)
@@ -56,33 +55,27 @@ test-multi-node-broadcast: $(BIN)/3b-multi-node-broadcast $(MAELSTROM)
 
 .PHONY: test-efficient-fault-tolerant-broadcast
 test-efficient-fault-tolerant-broadcast: $(BIN)/3e-efficient-broadcast $(MAELSTROM)
-	$(MTEST) -w broadcast --bin $< --node-count 25 --time-limit 20 --rate 100 \
-  --latency 100 --nemesis partition
+	$(MTEST) -w broadcast --bin $< --node-count 25 --time-limit 20 --rate 100 --latency 100 --nemesis partition
 
 .PHONY: test-grow-only-counter
 test-grow-only-counter: $(BIN)/4-grow-only-counter $(MAELSTROM)
-	$(MTEST) -w g-counter --bin $< --node-count 3 --rate 100 --time-limit 20 \
-  --nemesis partition
+	$(MTEST) -w g-counter --bin $< --node-count 3 --rate 100 --time-limit 20 --nemesis partition
 
 .PHONY: test-grow-only-counter-stateless
 test-grow-only-counter-stateless: $(BIN)/4-grow-only-counter-stateless $(MAELSTROM)
-	$(MTEST) -w g-counter --bin $< --node-count 3 --rate 100 --time-limit 20 \
-  --nemesis partition
+	$(MTEST) -w g-counter --bin $< --node-count 3 --rate 100 --time-limit 20 --nemesis partition
 
 .PHONY: test-single-node-log
 test-single-node-log: $(BIN)/5a-single-node-kafka-style-log $(MAELSTROM)
-	$(MTEST) -w kafka --bin $< --node-count 1 --concurrency 2n \
-  --time-limit 20 --rate 1000
+	$(MTEST) -w kafka --bin $< --node-count 1 --concurrency 2n --time-limit 20 --rate 1000
 
 .PHONY: test-distributed-log
 test-distributed-log: $(BIN)/5b-distributed-kafka-style-log $(MAELSTROM)
-	$(MTEST) -w kafka --bin $< --node-count 2 --concurrency 2n \
-  --time-limit 20 --rate 1000
+	$(MTEST) -w kafka --bin $< --node-count 2 --concurrency 2n --time-limit 20 --rate 1000
 
 .PHONY: test-efficient-log
 test-efficient-log: $(BIN)/5c-efficient-kafka-style-log $(MAELSTROM)
-	$(MTEST) -w kafka --bin $< --node-count 2 --concurrency 2n \
-  --time-limit 20 --rate 1000
+	$(MTEST) -w kafka --bin $< --node-count 2 --concurrency 2n --time-limit 20 --rate 1000
 
 # --- results
 
