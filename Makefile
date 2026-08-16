@@ -62,6 +62,11 @@ test-grow-only-counter-stateless: build maelstrom
 	./$(MAELSTROM) test -w g-counter --bin $(BIN)/4-grow-only-counter-stateless --node-count 3 --rate 100 --time-limit 20 \
   --nemesis partition
 
+.PHONY: test-single-node-log
+test-single-node-log: build maelstrom
+	./$(MAELSTROM) test -w kafka --bin $(BIN)/5a-single-node-kafka-style-log --node-count 1 --concurrency 2n \
+  --time-limit 20 --rate 1000
+
 # --- results
 
 .PHONY: serve
