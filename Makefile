@@ -77,6 +77,11 @@ test-distributed-log: $(BIN)/5b-distributed-kafka-style-log $(MAELSTROM)
 test-efficient-log: $(BIN)/5c-efficient-kafka-style-log $(MAELSTROM)
 	$(MTEST) -w kafka --bin $< --node-count 2 --concurrency 2n --time-limit 20 --rate 1000
 
+.PHONY: test-single-node-tx
+test-single-node-tx: $(BIN)/6a-single-node-transactions $(MAELSTROM)
+	$(MTEST) -w txn-rw-register --bin $< --node-count 1 --time-limit 20 --rate 1000 --concurrency 2n \
+  --consistency-models read-uncommitted --availability total
+
 # --- results
 
 .PHONY: serve
