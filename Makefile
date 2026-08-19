@@ -97,6 +97,34 @@ test-distributed-read-committed-transactions: $(BIN)/6bc-distributed-transaction
 	$(MTEST) -w txn-rw-register --bin $< --node-count 2 --concurrency 2n --time-limit 20 --rate 1000 \
   --consistency-models read-committed --availability total --nemesis partition
 
+TEST_TARGETS := \
+	test-echo \
+	test-unique \
+	test-single-node-broadcast \
+	test-multi-node-broadcast \
+	test-efficient-fault-tolerant-broadcast \
+	test-grow-only-counter \
+	test-grow-only-counter-stateless \
+	test-single-node-log \
+	test-distributed-log \
+	test-efficient-log \
+	test-single-node-tx \
+	test-distributed-read-uncommitted-transactions \
+	test-2-distributed-read-uncommitted-transactions \
+	test-distributed-read-committed-transactions
+
+.PHONY: test-all
+test-all: build $(MAELSTROM)
+	@failed=""; \
+	for t in $(TEST_TARGETS); do \
+		echo "==> $$t"; \
+		$(MAKE) --no-print-directory $$t || failed="$$failed $$t"; \
+	done; \
+	if [ -n "$$failed" ]; then \
+		echo; echo "FAILED:$$failed"; exit 1; \
+	fi; \
+	echo; echo "all $(words $(TEST_TARGETS)) workloads passed"
+
 # --- results
 
 .PHONY: serve
