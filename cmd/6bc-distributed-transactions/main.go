@@ -1,4 +1,4 @@
-// Challenge #6b: Totally-Available, Read Uncommitted Transactions
+// Challenges #6b & #6c: Totally-Available Transactions
 package main
 
 import (

@@ -82,15 +82,20 @@ test-single-node-tx: $(BIN)/6a-single-node-transactions $(MAELSTROM)
 	$(MTEST) -w txn-rw-register --bin $< --node-count 1 --time-limit 20 --rate 1000 --concurrency 2n \
   --consistency-models read-uncommitted --availability total
 
-.PHONY: test-distributed-read-uncommited-transactions
-test-distributed-read-uncommited-transactions:  $(BIN)/6b-distributed-read-uncommited-transactions $(MAELSTROM)
+.PHONY: test-distributed-read-uncommitted-transactions
+test-distributed-read-uncommitted-transactions:  $(BIN)/6bc-distributed-transactions $(MAELSTROM)
 	$(MTEST) -w txn-rw-register --bin $< --node-count 2 --concurrency 2n --time-limit 20 --rate 1000 \
   --consistency-models read-uncommitted
 
-.PHONY: test-2-distributed-read-uncommited-transactions
-test-2-distributed-read-uncommited-transactions:  $(BIN)/6b-distributed-read-uncommited-transactions $(MAELSTROM)
+.PHONY: test-2-distributed-read-uncommitted-transactions
+test-2-distributed-read-uncommitted-transactions:  $(BIN)/6bc-distributed-transactions $(MAELSTROM)
 	$(MTEST) -w txn-rw-register --bin $< --node-count 2 --concurrency 2n --time-limit 20 --rate 1000 \
   --consistency-models read-uncommitted --availability total --nemesis partition
+
+.PHONY: test-distributed-read-committed-transactions
+test-distributed-read-committed-transactions: $(BIN)/6bc-distributed-transactions $(MAELSTROM)
+	$(MTEST) -w txn-rw-register --bin $< --node-count 2 --concurrency 2n --time-limit 20 --rate 1000 \
+  --consistency-models read-committed --availability total --nemesis partition
 
 # --- results
 
